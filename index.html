@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rahul Raj – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --navy: #162447;
+    --gold: #c9a84c;
+    --gold-light: #e8c97e;
+    --cream: #f5f0e8;
+    --paper: #faf7f2;
+    --muted: #6b6b7b;
+    --rule: #d4c9b0;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem;
+    height: 60px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: .05em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, #0f3460 55%, #1a1a2e 100%);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 8rem 6rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,.15);
+    pointer-events: none;
+  }
+  #hero::after {
+    content: '';
+    position: absolute; top: 40px; right: 40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,.1);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem; font-weight: 600;
+  }
+  #hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.05; margin-bottom: 1.2rem;
+  }
+  #hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: 1.15rem; color: rgba(255,255,255,.65);
+    max-width: 560px; margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: .75rem 2rem;
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-size: .9rem; letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none;
+    transition: background .25s, color .25s;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--navy); }
+  .hero-contacts {
+    display: flex; gap: 1.5rem; margin-top: 2.5rem; flex-wrap: wrap;
+  }
+  .hero-contacts a {
+    color: rgba(255,255,255,.55);
+    text-decoration: none; font-size: .85rem;
+    display: flex; align-items: center; gap: .4rem;
+    transition: color .2s;
+  }
+  .hero-contacts a:hover { color: var(--gold-light); }
+
+  /* SECTION COMMONS */
+  section { padding: 5rem 6rem; }
+  section:nth-child(even) { background: var(--cream); }
+
+  .section-label {
+    font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: .5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700; color: var(--navy);
+    margin-bottom: 2.5rem; padding-bottom: 1rem;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { font-size: 1.05rem; color: #3a3a4a; margin-bottom: 1rem; font-weight: 400; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+  .skill-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700; color: var(--navy);
+    margin-bottom: 1rem; padding-bottom: .5rem;
+    border-left: 3px solid var(--gold); padding-left: .75rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .skill-tag {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    font-size: .8rem;
+    padding: .3rem .8rem;
+    border-radius: 2px;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    position: relative;
+    transition: box-shadow .25s, transform .25s;
+  }
+  .project-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); transform: translateY(-3px); }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--gold);
+  }
+  .project-date {
+    font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: .6rem;
+  }
+  .project-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .project-card ul { padding-left: 1.2rem; }
+  .project-card ul li { font-size: .9rem; color: #444; margin-bottom: .4rem; }
+
+  /* EDUCATION */
+  .edu-timeline { display: flex; flex-direction: column; gap: 1.8rem; }
+  .edu-item {
+    display: grid; grid-template-columns: 130px 1fr;
+    gap: 2rem; align-items: start;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-year {
+    font-size: .78rem; color: var(--muted); font-weight: 500;
+    letter-spacing: .04em; padding-top: .25rem;
+  }
+  .edu-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700; color: var(--navy);
+    margin-bottom: .25rem;
+  }
+  .edu-place { font-size: .9rem; color: var(--muted); margin-bottom: .2rem; }
+  .edu-score {
+    display: inline-block;
+    background: var(--navy); color: var(--gold);
+    font-size: .75rem; padding: .2rem .6rem;
+    letter-spacing: .05em; margin-top: .3rem;
+  }
+
+  /* CERTIFICATIONS */
+  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+  .cert-item {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 1.2rem 1.5rem;
+    display: flex; align-items: flex-start; gap: .8rem;
+  }
+  .cert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .1rem; }
+  .cert-item h4 { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: .2rem; }
+  .cert-item p { font-size: .78rem; color: var(--muted); }
+
+  /* TRAINING */
+  .training-box {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--gold);
+    padding: 2rem;
+  }
+  .training-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: .25rem;
+  }
+  .training-box .meta { font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
+  .training-box ul { padding-left: 1.2rem; }
+  .training-box ul li { font-size: .9rem; color: #444; margin-bottom: .4rem; }
+
+  /* CONTACT */
+  #contact { background: var(--navy); }
+  #contact .section-title { color: var(--white); border-color: rgba(201,168,76,.3); }
+  #contact .section-label { color: var(--gold-light); }
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: .8rem;
+    padding: 1.2rem; background: rgba(255,255,255,.05);
+    border: 1px solid rgba(201,168,76,.2);
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .contact-item:hover { background: rgba(201,168,76,.1); }
+  .contact-icon { font-size: 1.2rem; }
+  .contact-label { font-size: .7rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .1em; }
+  .contact-val { font-size: .88rem; color: var(--white); font-weight: 500; word-break: break-all; }
+
+  /* CV BUTTON */
+  .cv-note {
+    margin-top: 2.5rem; padding: 1.5rem 2rem;
+    background: rgba(201,168,76,.08);
+    border: 1px solid rgba(201,168,76,.25);
+    color: rgba(255,255,255,.7);
+    font-size: .9rem;
+  }
+  .cv-note strong { color: var(--gold-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,.35);
+    text-align: center; padding: 1.5rem;
+    font-size: .78rem; letter-spacing: .05em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .edu-item { grid-template-columns: 1fr; gap: .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#hero">Rahul Raj</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-tag">Computer Science Engineering Student</p>
+  <h1>Rahul <span>Raj</span></h1>
+  <p class="hero-sub">Data Science · Machine Learning · Full-Stack Development<br/>Building intelligent systems and data-driven solutions.</p>
+  <a href="#projects" class="hero-cta">View My Work</a>
+  <div class="hero-contacts">
+    <a href="mailto:rahulraj24590@gmail.com">📧 rahulraj24590@gmail.com</a>
+    <a href="tel:+917739029326">📱 +91 77390 29326</a>
+    <a href="https://www.linkedin.com/in/rahulraj24590/" target="_blank">🔗 LinkedIn</a>
+    <a href="https://github.com/rahulraj24590" target="_blank">💻 GitHub</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Introduction</p>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I am a Computer Science Engineering student at Lovely Professional University with a strong interest in data science, machine learning, and software development.</p>
+      <p>I have hands-on experience in building predictive models, data analysis, and full-stack applications. I am passionate about problem-solving and continuously improving my technical skills.</p>
+      <p>Currently pursuing my B.Tech (CSE) with a focus on applied machine learning, data analytics, and modern web development practices.</p>
+    </div>
+    <div>
+      <div class="skill-group" style="margin-bottom:1.5rem">
+        <h3>Current Focus</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Full-Stack Dev</span>
+          <span class="skill-tag">Generative AI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Quick Facts</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">📍 Punjab, India</span>
+          <span class="skill-tag">🎓 LPU — B.Tech CSE</span>
+          <span class="skill-tag">📅 2023 – Present</span>
+          <span class="skill-tag">📊 CGPA: 6.5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Expertise</p>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Programming Languages</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Data Science & Analytics</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Predictive Analytics</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">EDA</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Python Libraries</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
+        <span class="skill-tag">Scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Tools & Platforms</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">MS Excel</span>
+        <span class="skill-tag">Google Colab</span>
+        <span class="skill-tag">Git & GitHub</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Soft Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Problem-Solving</span>
+        <span class="skill-tag">Teamwork</span>
+        <span class="skill-tag">Project Management</span>
+        <span class="skill-tag">Adaptability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Work Showcase</p>
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <p class="project-date">November 2025</p>
+      <h3>🫀 Heart Disease Prediction</h3>
+      <ul>
+        <li>Built prediction model using Logistic Regression & Gaussian Naive Bayes.</li>
+        <li>Achieved ~85–90% accuracy with preprocessing & feature engineering.</li>
+        <li>Compared models via Accuracy, MSE, RMSE, and R² score.</li>
+        <li>Stack: Python · Pandas · NumPy · Scikit-learn · Matplotlib · Seaborn</li>
+      </ul>
+    </div>
+
+    <div class="project-card">
+      <p class="project-date">October 2025</p>
+      <h3>📊 HR Employee Attrition Dashboard</h3>
+      <ul>
+        <li>Built interactive Power BI dashboard for employee attrition analysis.</li>
+        <li>Included KPIs, income band analysis & advanced visualisations.</li>
+        <li>Multi-page dashboards with drill-down and filtering features.</li>
+        <li>Used DAX and data modelling for decision-making insights.</li>
+      </ul>
+    </div>
+
+    <div class="project-card">
+      <p class="project-date">February 2026</p>
+      <h3>💼 Payroll Management System</h3>
+      <ul>
+        <li>JWT-secured payroll system with role-based access (Admin/User).</li>
+        <li>RESTful APIs with CRUD operations using Node.js & MongoDB.</li>
+        <li>Authentication, authorisation middleware, and password hashing.</li>
+        <li>Stack: Node.js · MongoDB · Express · JWT</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-timeline">
+
+    <div class="edu-item">
+      <div class="edu-year">Aug 2023 – Present</div>
+      <div>
+        <p class="edu-title">B.Tech – Computer Science Engineering</p>
+        <p class="edu-place">Lovely Professional University, Punjab</p>
+        <span class="edu-score">CGPA: 6.5</span>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-year">Mar 2020 – May 2021</div>
+      <div>
+        <p class="edu-title">Intermediate (PCM)</p>
+        <p class="edu-place">Holy Mission High School, Samastipur, Bihar</p>
+        <span class="edu-score">71%</span>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-year">Mar 2018 – May 2019</div>
+      <div>
+        <p class="edu-title">Matriculation</p>
+        <p class="edu-place">Holy Mission High School, Samastipur, Bihar</p>
+        <span class="edu-score">81%</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS + TRAINING -->
+<section id="certifications">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications & Training</h2>
+
+  <div class="cert-list" style="margin-bottom:2.5rem">
+    <div class="cert-item">
+      <span class="cert-icon">🏅</span>
+      <div>
+        <h4>Master Generative AI & Generative AI Tools</h4>
+        <p>Udemy · Sept 2025</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">🏅</span>
+      <div>
+        <h4>Build Generative AI Apps with No-Code Tools</h4>
+        <p>Udemy · Sept 2025</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">🎓</span>
+      <div>
+        <h4>Digital Systems: Logic Gates to Processors</h4>
+        <p>Coursera (UAB) · Dec 2024</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-icon">🎓</span>
+      <div>
+        <h4>The Bits and Bytes of Computer Networking</h4>
+        <p>Coursera (Google) · Sept 2024</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="training-box">
+    <h3>Data Science using Python — Industrial Training</h3>
+    <p class="meta">Lovely Professional University &nbsp;|&nbsp; Jun 2025 – Jul 2025</p>
+    <ul>
+      <li>Performed Exploratory Data Analysis (EDA) using NumPy and Pandas.</li>
+      <li>Built ML models: Linear Regression, KNN, SVM, Decision Trees, K-Means, Ensemble methods.</li>
+      <li>Applied feature engineering to improve model performance and accuracy.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-grid">
+    <a class="contact-item" href="mailto:rahulraj24590@gmail.com">
+      <span class="contact-icon">📧</span>
+      <div>
+        <p class="contact-label">Email</p>
+        <p class="contact-val">rahulraj24590@gmail.com</p>
+      </div>
+    </a>
+    <a class="contact-item" href="tel:+917739029326">
+      <span class="contact-icon">📱</span>
+      <div>
+        <p class="contact-label">Phone</p>
+        <p class="contact-val">+91 77390 29326</p>
+      </div>
+    </a>
+    <a class="contact-item" href="https://www.linkedin.com/in/rahulraj24590/" target="_blank">
+      <span class="contact-icon">🔗</span>
+      <div>
+        <p class="contact-label">LinkedIn</p>
+        <p class="contact-val">rahulraj24590</p>
+      </div>
+    </a>
+    <a class="contact-item" href="https://github.com/rahulraj24590" target="_blank">
+      <span class="contact-icon">💻</span>
+      <div>
+        <p class="contact-label">GitHub</p>
+        <p class="contact-val">rahulraj24590</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="cv-note">
+    <strong>📄 CV / Resume:</strong> To attach your CV, save this HTML file, place your resume PDF in the same folder, and link it with: 
+    <code style="background:rgba(255,255,255,.08); padding:.1rem .4rem; font-size:.85rem;">&lt;a href="Rahul_Raj_CV.pdf" download&gt;Download CV&lt;/a&gt;</code>
+  </div>
+</section>
+
+<footer>
+  © 2026 Rahul Raj &nbsp;·&nbsp; Computer Science Engineering, LPU
+</footer>
+
+</body>
+</html>
